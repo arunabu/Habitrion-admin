@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "default": "task-manager---ai-powered"
+  },
   "targets": {},
   "etags": {}
 }

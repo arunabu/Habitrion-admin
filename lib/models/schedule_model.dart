@@ -1,3 +1,12 @@
+import 'dart:developer' as developer;
+
+// Helper to safely parse a double from various numeric types
+double _safeParseDouble(dynamic value) {
+  if (value is double) return value;
+  if (value is int) return value.toDouble();
+  if (value is String) return double.tryParse(value) ?? 0.0;
+  return 0.0;
+}
 
 class Schedule {
   final String id;
@@ -11,11 +20,28 @@ class Schedule {
   });
 
   factory Schedule.fromMap(String id, Map<String, dynamic> data) {
+    var summaryData = data['weekSummary'];
+    var categoriesData = data['categoriesSummary'];
+
     return Schedule(
       id: id,
-      weekSummary: WeekSummary.fromMap(data['weekSummary'] ?? {}),
-      categoriesSummary: (data['categoriesSummary'] as Map<String, dynamic> ?? {})
-          .map((key, value) => MapEntry(key, CategorySummary.fromMap(value))),
+      weekSummary: summaryData is Map<String, dynamic>
+          ? WeekSummary.fromMap(summaryData)
+          : WeekSummary.empty(), // Use an empty summary if data is invalid
+      categoriesSummary: categoriesData is Map<String, dynamic>
+          ? categoriesData.map((key, value) {
+              if (value is Map<String, dynamic>) {
+                return MapEntry(key, CategorySummary.fromMap(value));
+              }
+              // Log error and skip invalid entry
+              developer.log(
+                'Invalid data for category summary for key: $key in schedule: $id',
+                name: 'Schedule.fromMap',
+                level: 900,
+              );
+              return MapEntry(key, CategorySummary.empty());
+            })
+          : {},
     );
   }
 }
@@ -27,10 +53,21 @@ class WeekSummary {
   WeekSummary({required this.planned, required this.actual});
 
   factory WeekSummary.fromMap(Map<String, dynamic> data) {
+    var plannedData = data['planned'];
+    var actualData = data['actual'];
+
     return WeekSummary(
-      planned: PlannedActual.fromMap(data['planned'] ?? {}),
-      actual: PlannedActual.fromMap(data['actual'] ?? {}),
+      planned: plannedData is Map<String, dynamic>
+          ? PlannedActual.fromMap(plannedData)
+          : PlannedActual.empty(),
+      actual: actualData is Map<String, dynamic>
+          ? PlannedActual.fromMap(actualData)
+          : PlannedActual.empty(),
     );
+  }
+
+  factory WeekSummary.empty() {
+    return WeekSummary(planned: PlannedActual.empty(), actual: PlannedActual.empty());
   }
 }
 
@@ -42,9 +79,13 @@ class CategorySummary {
 
   factory CategorySummary.fromMap(Map<String, dynamic> data) {
     return CategorySummary(
-      planned: (data['planned'] ?? 0).toDouble(),
-      actual: (data['actual'] ?? 0).toDouble(),
+      planned: _safeParseDouble(data['planned']),
+      actual: _safeParseDouble(data['actual']),
     );
+  }
+
+  factory CategorySummary.empty() {
+    return CategorySummary(planned: 0.0, actual: 0.0);
   }
 }
 
@@ -63,10 +104,14 @@ class PlannedActual {
 
   factory PlannedActual.fromMap(Map<String, dynamic> data) {
     return PlannedActual(
-      learning: (data['learning'] ?? 0).toDouble(),
-      office: (data['office'] ?? 0).toDouble(),
-      sideHustle: (data['side_hustle'] ?? 0).toDouble(),
-      balance: (data['balance'] ?? 0).toDouble(),
+      learning: _safeParseDouble(data['learning']),
+      office: _safeParseDouble(data['office']),
+      sideHustle: _safeParseDouble(data['side_hustle']),
+      balance: _safeParseDouble(data['balance']),
     );
+  }
+
+  factory PlannedActual.empty() {
+    return PlannedActual(learning: 0.0, office: 0.0, sideHustle: 0.0, balance: 0.0);
   }
 }

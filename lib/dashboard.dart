@@ -1,8 +1,8 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myapp/screens/schedule_screen.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -12,41 +12,53 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  String _jsonContent = '';
-  bool _showCreateUserButton = false;
+  bool _isLoading = true;
+  String? _firstUserId;
+  String? _error;
 
   @override
   void initState() {
     super.initState();
-    _loadJsonData();
+    _initializeData();
   }
 
-  Future<void> _loadJsonData() async {
+  Future<void> _initializeData() async {
     try {
-      final String response = await rootBundle.loadString('assets/nextweekstask.json');
-      final data = await json.decode(response);
-      setState(() {
-        _jsonContent = const JsonEncoder.withIndent('  ').convert(data);
-        _showCreateUserButton = true; 
-      });
+      final snapshot =
+          await FirebaseFirestore.instance.collection('users').limit(1).get();
+      if (mounted) {
+        if (snapshot.docs.isNotEmpty) {
+          setState(() {
+            _firstUserId = snapshot.docs.first.id;
+            _isLoading = false;
+          });
+        } else {
+          // If no data exists, automatically populate it
+          await _pushJsonToFirestore();
+        }
+      }
     } catch (e) {
-      print("Error loading JSON data: $e");
-      setState(() {
-        _jsonContent = "Error loading JSON data: $e";
-      });
+      if (mounted) {
+        setState(() {
+          _error = "Error initializing data: $e";
+          _isLoading = false;
+        });
+      }
     }
   }
 
   Future<void> _pushJsonToFirestore() async {
     try {
-      final String response = await rootBundle.loadString('assets/nextweekstask.json');
+      final String response =
+          await rootBundle.loadString('assets/nextweekstask.json');
       final data = json.decode(response);
 
       final WriteBatch batch = FirebaseFirestore.instance.batch();
       final users = data['users'] as Map<String, dynamic>;
 
       users.forEach((userId, userData) {
-        final userDocRef = FirebaseFirestore.instance.collection('users').doc(userId);
+        final userDocRef =
+            FirebaseFirestore.instance.collection('users').doc(userId);
         userData = userData as Map<String, dynamic>;
 
         final profile = userData.remove('profile');
@@ -60,7 +72,7 @@ class _DashboardState extends State<Dashboard> {
           weekData = weekData as Map<String, dynamic>;
 
           final days = weekData.remove('days');
-          batch.set(weekDocRef, weekData); 
+          batch.set(weekDocRef, weekData);
 
           if (days != null) {
             final daysData = days as Map<String, dynamic>;
@@ -75,17 +87,17 @@ class _DashboardState extends State<Dashboard> {
 
       await batch.commit();
 
+      // After pushing data, re-initialize to get the user ID
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User collection created successfully!')),
-        );
+        await _initializeData();
       }
+
     } catch (e) {
-      print('Error pushing JSON to Firestore: $e');
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
+        setState(() {
+          _error = 'Error pushing JSON to Firestore: $e';
+          _isLoading = false;
+        });
       }
     }
   }
@@ -93,21 +105,38 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: const Text('Habitrion Admin Dashboard'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            if (_showCreateUserButton)
-              ElevatedButton(
-                onPressed: _pushJsonToFirestore,
-                child: const Text('Create Complete User Collection'),
-              ),
-          ],
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (_error != null) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            _error!,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+            textAlign: TextAlign.center,
+          ),
         ),
-      ),
+      );
+    }
+    if (_firstUserId != null) {
+      return ScheduleBody(userId: _firstUserId!);
+    }
+    // This state should ideally not be reached if initialization is successful
+    return const Center(
+      child: Text('Could not load user data. Please restart the application.'),
     );
   }
 }

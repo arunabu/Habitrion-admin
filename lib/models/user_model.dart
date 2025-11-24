@@ -1,4 +1,3 @@
-
 class User {
   final String id;
   final Profile profile;
@@ -7,10 +6,17 @@ class User {
   User({required this.id, required this.profile, required this.settings});
 
   factory User.fromMap(String id, Map<String, dynamic> data) {
+    var profileData = data['profile'];
+    var settingsData = data['settings'];
+
     return User(
       id: id,
-      profile: Profile.fromMap(data['profile'] ?? {}),
-      settings: Settings.fromMap(data['settings'] ?? {}),
+      profile: profileData is Map<String, dynamic>
+          ? Profile.fromMap(profileData)
+          : Profile.empty(),
+      settings: settingsData is Map<String, dynamic>
+          ? Settings.fromMap(settingsData)
+          : Settings.empty(),
     );
   }
 }
@@ -24,10 +30,14 @@ class Profile {
 
   factory Profile.fromMap(Map<String, dynamic> data) {
     return Profile(
-      name: data['name'] ?? '',
-      createdAt: data['createdAt'] ?? '',
-      email: data['email'] ?? '',
+      name: data['name'] as String? ?? '',
+      createdAt: data['createdAt'] as String? ?? '',
+      email: data['email'] as String? ?? '',
     );
+  }
+
+  factory Profile.empty() {
+    return Profile(name: '', createdAt: '', email: '');
   }
 }
 
@@ -39,8 +49,12 @@ class Settings {
 
   factory Settings.fromMap(Map<String, dynamic> data) {
     return Settings(
-      theme: data['theme'] ?? '',
-      timezone: data['timezone'] ?? '',
+      theme: data['theme'] as String? ?? '',
+      timezone: data['timezone'] as String? ?? '',
     );
+  }
+
+  factory Settings.empty() {
+    return Settings(theme: '', timezone: '');
   }
 }

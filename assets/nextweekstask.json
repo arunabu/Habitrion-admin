@@ -1,0 +1,103 @@
+{
+  "users": {
+    "user_001": {
+      "profile": {
+        "name": "Arun",
+        "createdAt": "2025-11-23",
+        "email": "arun@example.com"
+      },
+      "settings": {
+        "theme": "light",
+        "timezone": "Asia/Kolkata"
+      },
+      "schedules": {
+        "week_2025_11_24": {
+          "weekSummary": {
+            "planned": {
+              "learning": 16,
+              "office": 32,
+              "side_hustle": 12,
+              "balance": 9
+            },
+            "actual": {
+              "learning": 0,
+              "office": 0,
+              "side_hustle": 0,
+              "balance": 0
+            }
+          },
+          "categoriesSummary": {
+            "Flutter": { "planned": 6, "actual": 0 },
+            "AWS": { "planned": 3, "actual": 0 },
+            "OfficeWork": { "planned": 32, "actual": 0 },
+            "UtilityBox": { "planned": 6, "actual": 0 },
+            "Wellness": { "planned": 9, "actual": 0 }
+          },
+          "days": {
+            "2025-11-24": {
+              "day": "Monday",
+              "segments": [
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "balance", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "balance", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
+                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
+                { "start": "18:00", "end": "20:00", "activity": "Utility Box Work", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
+                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Read, Plan", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+              ]
+            },
+            "2025-11-25": {
+              "day": "Tuesday",
+              "segments": [
+                { "start": "05:00", "end": "06:00", "activity": "Quick Revision AWS", "category": "learning", "subcategory": "AWS", "planned": 1, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
+                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
+                { "start": "18:00", "end": "20:00", "activity": "Utility Box - Bug Fixing", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
+                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Read, Plan", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+              ]
+            },
+            "2025-11-26": {
+              "day": "Wednesday",
+              "segments": [
+                { "start": "05:00", "end": "06:00", "activity": "Morning Yoga", "category": "balance", "subcategory": "wellness", "planned": 1, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
+                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
+                { "start": "18:00", "end": "20:00", "activity": "Utility Box Testing", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
+                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Journal", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+              ]
+            },
+            "2025-11-27": {
+              "day": "Thursday",
+              "segments": [
+                { "start": "05:00", "end": "06:00", "activity": "Morning Meditation", "category": "balance", "subcategory": "wellness", "planned": 1, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study AWS", "category": "learning", "subcategory": "AWS", "planned": 1.5, "actual": 0 },
+                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
+                { "start": "18:00", "end": "20:00", "activity": "Utility Box - New Features", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
+                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Review", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+              ]
+            },
+            "2025-11-28": {
+              "day": "Friday",
+              "segments": [
+                { "start": "05:00", "end": "06:00", "activity": "Morning Stretch", "category": "balance", "subcategory": "wellness", "planned": 1, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Learn Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
+                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
+                { "start": "18:00", "end": "20:00", "activity": "Utility Box - Analysis", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
+                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Read", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+              ]
+            },
+            "2025-11-29": {
+              "day": "Saturday",
+              "segments": [
+                { "start": "06:00", "end": "07:00", "activity": "Weekend Run", "category": "balance", "subcategory": "exercise", "planned": 1, "actual": 0 },
+                { "start": "07:00", "end": "09:00", "activity": "Study AWS", "category": "learning", "subcategory": "AWS", "planned": 2, "actual": 0 },
+                { "start": "09:30", "end": "14:30", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 5, "actual": 0 },
+                { "start": "15:00", "end": "17:00", "activity": "Utility Box Improvements", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
+                { "start": "18:00", "end": "20:00", "activity": "Dinner, Plan Next Week", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

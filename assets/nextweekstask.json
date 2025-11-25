@@ -1,6 +1,6 @@
 {
   "users": {
-    "user_001": {
+    "user001": {
       "profile": {
         "name": "Arun",
         "createdAt": "2025-11-23",
@@ -14,88 +14,138 @@
         "week_2025_11_24": {
           "categoriesSummary": {
             "planned": {
-              "learning": 16,
-              "office": 32,
-              "side_hustle": 12,
-              "balance": 9
+              "office": 40,
+              "sideHustle": 11,
+              "learning": 11.5,
+              "cooking": 9,
+              "travel": 6,
+              "gettingReady": 3,
+              "personalTime": 21
             },
             "actual": {
-              "learning": 0,
               "office": 0,
-              "side_hustle": 0,
-              "balance": 0
+              "sideHustle": 0,
+              "learning": 0,
+              "cooking": 0,
+              "travel": 0,
+              "gettingReady": 0,
+              "personalTime": 0
             }
           },
-           
           "subcategoriesSummary": {
-            "routine": { "planned": 10.5, "actual": 0 },
-            "exercise": { "planned": 1.5, "actual": 0 },
-            "Flutter": { "planned": 6, "actual": 0 },
-            "OfficeWork": { "planned": 32, "actual": 0 },
-            "UtilityBox": { "planned": 10, "actual": 0 },
-            "AWS": { "planned": 7.5, "actual": 0 },
-            "wellness": { "planned": 3, "actual": 0 }
+            "officeWork": { "planned": 40, "actual": 0 },
+            "m4uProject": { "planned": 5.5, "actual": 0 },
+            "utilityBox": { "planned": 5.5, "actual": 0 },
+            "aws": { "planned": 5.75, "actual": 0 },
+            "flutter": { "planned": 5.75, "actual": 0 },
+            "cook": { "planned": 9, "actual": 0 },
+            "travelToOffice": { "planned": 3, "actual": 0 },
+            "travelToHome": { "planned": 3, "actual": 0 },
+            "freshUp": { "planned": 3, "actual": 0 },
+            "routine": { "planned": 12, "actual": 0 },
+            "exercise": { "planned": 3, "actual": 0 },
+            "wellness": { "planned": 3, "actual": 0 },
+            "windUpTime": { "planned": 3, "actual": 0 }
           },
           "days": {
             "2025-11-24": {
               "day": "Monday",
               "segments": [
-                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "balance", "subcategory": "routine", "planned": 0.5, "actual": 0 },
-                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "balance", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
-                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
-                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
-                { "start": "18:00", "end": "20:00", "activity": "Utility Box Work", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
-                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Read, Plan", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "personalTime", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "personalTime", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "flutter", "planned": 1.5, "actual": 0 },
+                { "start": "07:30", "end": "09:00", "activity": "Cook", "category": "cooking", "subcategory": "cook", "planned": 1.5, "actual": 0 },
+                { "start": "09:00", "end": "09:30", "activity": "Travel to Office", "category": "travel", "subcategory": "travelToOffice", "planned": 0.5, "actual": 0 },
+                { "start": "09:30", "end": "16:30", "activity": "Office Work", "category": "office", "subcategory": "officeWork", "planned": 7, "actual": 0 },
+                { "start": "16:30", "end": "18:00", "activity": "M4U Project", "category": "sideHustle", "subcategory": "m4uProject", "planned": 1.5, "actual": 0 },
+                { "start": "18:00", "end": "18:30", "activity": "Travel to Home", "category": "travel", "subcategory": "travelToHome", "planned": 0.5, "actual": 0 },
+                { "start": "18:30", "end": "19:00", "activity": "Freshup", "category": "gettingReady", "subcategory": "freshUp", "planned": 0.5, "actual": 0 },
+                { "start": "19:00", "end": "20:30", "activity": "Dinner, Relax, Read", "category": "personalTime", "subcategory": "routine", "planned": 1.5, "actual": 0 },
+                { "start": "20:30", "end": "22:00", "activity": "Wind Up Time", "category": "personalTime", "subcategory": "windUpTime", "planned": 1.5, "actual": 0 }
               ]
             },
             "2025-11-25": {
               "day": "Tuesday",
               "segments": [
-                { "start": "05:00", "end": "06:00", "activity": "Quick Revision AWS", "category": "learning", "subcategory": "AWS", "planned": 1, "actual": 0 },
-                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
-                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
-                { "start": "18:00", "end": "20:00", "activity": "Utility Box - Bug Fixing", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
-                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Read, Plan", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "personalTime", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "personalTime", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study AWS", "category": "learning", "subcategory": "aws", "planned": 1.5, "actual": 0 },
+                { "start": "07:30", "end": "09:00", "activity": "Cook", "category": "cooking", "subcategory": "cook", "planned": 1.5, "actual": 0 },
+                { "start": "09:00", "end": "09:30", "activity": "Travel to Office", "category": "travel", "subcategory": "travelToOffice", "planned": 0.5, "actual": 0 },
+                { "start": "09:30", "end": "16:30", "activity": "Office Work", "category": "office", "subcategory": "officeWork", "planned": 7, "actual": 0 },
+                { "start": "16:30", "end": "18:00", "activity": "Utility Box - Bug Fixing", "category": "sideHustle", "subcategory": "utilityBox", "planned": 1.5, "actual": 0 },
+                { "start": "18:00", "end": "18:30", "activity": "Travel to Home", "category": "travel", "subcategory": "travelToHome", "planned": 0.5, "actual": 0 },
+                { "start": "18:30", "end": "19:00", "activity": "Freshup", "category": "gettingReady", "subcategory": "freshUp", "planned": 0.5, "actual": 0 },
+                { "start": "19:00", "end": "20:30", "activity": "Dinner, Relax, Read", "category": "personalTime", "subcategory": "routine", "planned": 1.5, "actual": 0 },
+                { "start": "20:30", "end": "22:00", "activity": "Wind Up Time", "category": "personalTime", "subcategory": "windUpTime", "planned": 1.5, "actual": 0 }
               ]
             },
             "2025-11-26": {
               "day": "Wednesday",
               "segments": [
-                { "start": "05:00", "end": "06:00", "activity": "Morning Yoga", "category": "balance", "subcategory": "wellness", "planned": 1, "actual": 0 },
-                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
-                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
-                { "start": "18:00", "end": "20:00", "activity": "Utility Box Testing", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
-                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Journal", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "personalTime", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "personalTime", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "flutter", "planned": 1.5, "actual": 0 },
+                { "start": "07:30", "end": "09:00", "activity": "Cook", "category": "cooking", "subcategory": "cook", "planned": 1.5, "actual": 0 },
+                { "start": "09:00", "end": "09:30", "activity": "Travel to Office", "category": "travel", "subcategory": "travelToOffice", "planned": 0.5, "actual": 0 },
+                { "start": "09:30", "end": "16:30", "activity": "Office Work", "category": "office", "subcategory": "officeWork", "planned": 7, "actual": 0 },
+                { "start": "16:30", "end": "17:30", "activity": "M4U Project", "category": "sideHustle", "subcategory": "m4uProject", "planned": 1, "actual": 0 },
+                { "start": "17:30", "end": "18:00", "activity": "Wellness - Yoga", "category": "personalTime", "subcategory": "wellness", "planned": 0.5, "actual": 0 },
+                { "start": "18:00", "end": "18:30", "activity": "Travel to Home", "category": "travel", "subcategory": "travelToHome", "planned": 0.5, "actual": 0 },
+                { "start": "18:30", "end": "19:00", "activity": "Freshup", "category": "gettingReady", "subcategory": "freshUp", "planned": 0.5, "actual": 0 },
+                { "start": "19:00", "end": "20:30", "activity": "Dinner, Relax, Journal", "category": "personalTime", "subcategory": "routine", "planned": 1.5, "actual": 0 },
+                { "start": "20:30", "end": "22:00", "activity": "Wind Up Time", "category": "personalTime", "subcategory": "windUpTime", "planned": 1.5, "actual": 0 }
               ]
             },
             "2025-11-27": {
               "day": "Thursday",
               "segments": [
-                { "start": "05:00", "end": "06:00", "activity": "Morning Meditation", "category": "balance", "subcategory": "wellness", "planned": 1, "actual": 0 },
-                { "start": "06:00", "end": "07:30", "activity": "Study AWS", "category": "learning", "subcategory": "AWS", "planned": 1.5, "actual": 0 },
-                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
-                { "start": "18:00", "end": "20:00", "activity": "Utility Box - New Features", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
-                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Review", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "personalTime", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "personalTime", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study AWS", "category": "learning", "subcategory": "aws", "planned": 1.5, "actual": 0 },
+                { "start": "07:30", "end": "09:00", "activity": "Cook", "category": "cooking", "subcategory": "cook", "planned": 1.5, "actual": 0 },
+                { "start": "09:00", "end": "09:30", "activity": "Travel to Office", "category": "travel", "subcategory": "travelToOffice", "planned": 0.5, "actual": 0 },
+                { "start": "09:30", "end": "16:30", "activity": "Office Work", "category": "office", "subcategory": "officeWork", "planned": 7, "actual": 0 },
+                { "start": "16:30", "end": "17:30", "activity": "Utility Box - New Features", "category": "sideHustle", "subcategory": "utilityBox", "planned": 1, "actual": 0 },
+                { "start": "17:30", "end": "18:00", "activity": "Wellness - Meditation", "category": "personalTime", "subcategory": "wellness", "planned": 0.5, "actual": 0 },
+                { "start": "18:00", "end": "18:30", "activity": "Travel to Home", "category": "travel", "subcategory": "travelToHome", "planned": 0.5, "actual": 0 },
+                { "start": "18:30", "end": "19:00", "activity": "Freshup", "category": "gettingReady", "subcategory": "freshUp", "planned": 0.5, "actual": 0 },
+                { "start": "19:00", "end": "20:30", "activity": "Dinner, Relax, Review", "category": "personalTime", "subcategory": "routine", "planned": 1.5, "actual": 0 },
+                { "start": "20:30", "end": "22:00", "activity": "Wind Up Time", "category": "personalTime", "subcategory": "windUpTime", "planned": 1.5, "actual": 0 }
               ]
             },
             "2025-11-28": {
               "day": "Friday",
               "segments": [
-                { "start": "05:00", "end": "06:00", "activity": "Morning Stretch", "category": "balance", "subcategory": "wellness", "planned": 1, "actual": 0 },
-                { "start": "06:00", "end": "07:30", "activity": "Learn Flutter", "category": "learning", "subcategory": "Flutter", "planned": 1.5, "actual": 0 },
-                { "start": "09:30", "end": "18:00", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 8.5, "actual": 0 },
-                { "start": "18:00", "end": "20:00", "activity": "Utility Box - Analysis", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
-                { "start": "20:00", "end": "22:00", "activity": "Dinner, Relax, Read", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "personalTime", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "personalTime", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study Flutter", "category": "learning", "subcategory": "flutter", "planned": 1.5, "actual": 0 },
+                { "start": "07:30", "end": "09:00", "activity": "Cook", "category": "cooking", "subcategory": "cook", "planned": 1.5, "actual": 0 },
+                { "start": "09:00", "end": "09:30", "activity": "Travel to Office", "category": "travel", "subcategory": "travelToOffice", "planned": 0.5, "actual": 0 },
+                { "start": "09:30", "end": "16:30", "activity": "Office Work", "category": "office", "subcategory": "officeWork", "planned": 7, "actual": 0 },
+                { "start": "16:30", "end": "17:30", "activity": "M4U Project", "category": "sideHustle", "subcategory": "m4uProject", "planned": 1, "actual": 0 },
+                { "start": "17:30", "end": "18:00", "activity": "Wellness - Stretch", "category": "personalTime", "subcategory": "wellness", "planned": 0.5, "actual": 0 },
+                { "start": "18:00", "end": "18:30", "activity": "Travel to Home", "category": "travel", "subcategory": "travelToHome", "planned": 0.5, "actual": 0 },
+                { "start": "18:30", "end": "19:00", "activity": "Freshup", "category": "gettingReady", "subcategory": "freshUp", "planned": 0.5, "actual": 0 },
+                { "start": "19:00", "end": "20:30", "activity": "Dinner, Relax, Read", "category": "personalTime", "subcategory": "routine", "planned": 1.5, "actual": 0 },
+                { "start": "20:30", "end": "22:00", "activity": "Wind Up Time", "category": "personalTime", "subcategory": "windUpTime", "planned": 1.5, "actual": 0 }
               ]
             },
             "2025-11-29": {
               "day": "Saturday",
               "segments": [
-                { "start": "06:00", "end": "07:00", "activity": "Weekend Run", "category": "balance", "subcategory": "exercise", "planned": 1, "actual": 0 },
-                { "start": "07:00", "end": "09:00", "activity": "Study AWS", "category": "learning", "subcategory": "AWS", "planned": 2, "actual": 0 },
-                { "start": "09:30", "end": "14:30", "activity": "Office Work", "category": "office", "subcategory": "OfficeWork", "planned": 5, "actual": 0 },
-                { "start": "15:00", "end": "17:00", "activity": "Utility Box Improvements", "category": "side_hustle", "subcategory": "UtilityBox", "planned": 2, "actual": 0 },
-                { "start": "18:00", "end": "20:00", "activity": "Dinner, Plan Next Week", "category": "balance", "subcategory": "routine", "planned": 2, "actual": 0 }
+                { "start": "05:00", "end": "05:30", "activity": "Fresh Up", "category": "personalTime", "subcategory": "routine", "planned": 0.5, "actual": 0 },
+                { "start": "05:30", "end": "06:00", "activity": "Walk / Exercise", "category": "personalTime", "subcategory": "exercise", "planned": 0.5, "actual": 0 },
+                { "start": "06:00", "end": "07:30", "activity": "Study AWS", "category": "learning", "subcategory": "aws", "planned": 1.5, "actual": 0 },
+                { "start": "07:30", "end": "09:00", "activity": "Cook", "category": "cooking", "subcategory": "cook", "planned": 1.5, "actual": 0 },
+                { "start": "09:00", "end": "09:30", "activity": "Travel to Office", "category": "travel", "subcategory": "travelToOffice", "planned": 0.5, "actual": 0 },
+                { "start": "09:30", "end": "15:30", "activity": "Office Work", "category": "office", "subcategory": "officeWork", "planned": 6, "actual": 0 },
+                { "start": "15:30", "end": "17:00", "activity": "Utility Box Improvements", "category": "sideHustle", "subcategory": "utilityBox", "planned": 1.5, "actual": 0 },
+                { "start": "17:00", "end": "18:00", "activity": "Study Flutter", "category": "learning", "subcategory": "flutter", "planned": 1, "actual": 0 },
+                { "start": "18:00", "end": "18:30", "activity": "Travel to Home", "category": "travel", "subcategory": "travelToHome", "planned": 0.5, "actual": 0 },
+                { "start": "18:30", "end": "19:00", "activity": "Freshup", "category": "gettingReady", "subcategory": "freshUp", "planned": 0.5, "actual": 0 },
+                { "start": "19:00", "end": "20:30", "activity": "Dinner, Plan Next Week", "category": "personalTime", "subcategory": "routine", "planned": 1.5, "actual": 0 },
+                { "start": "20:30", "end": "22:00", "activity": "Wind Up Time", "category": "personalTime", "subcategory": "windUpTime", "planned": 1.5, "actual": 0 }
               ]
             }
           }

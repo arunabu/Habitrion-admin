@@ -8,14 +8,26 @@ class Day {
   Day({required this.id, required this.segments});
 
   factory Day.fromMap(String id, Map<String, dynamic> data) {
-    final segmentsData = data['segments'] as List<dynamic>? ?? [];
-    final segments = segmentsData
-        .asMap()
-        .entries
-        .map((entry) {
-          return Task.fromMap('$id-${entry.key}', entry.value as Map<String, dynamic>);
-        })
-        .toList();
+    final segmentsData = data['segments'];
+    List<Task> segments = [];
+
+    if (segmentsData is List) {
+      segments = segmentsData
+          .asMap()
+          .entries
+          .map((entry) {
+            final segmentData = entry.value;
+            if (segmentData is Map<String, dynamic>) {
+              return Task.fromMap('$id-${entry.key}', segmentData);
+            } else {
+              // Handle cases where a segment is not a valid map
+              return null;
+            }
+          })
+          .where((task) => task != null) // Filter out null tasks
+          .cast<Task>()
+          .toList();
+    }
 
     return Day(id: id, segments: segments);
   }
@@ -23,9 +35,9 @@ class Day {
 
 class Task {
   final String id;
-  final String activity; // Renamed from title
-  final String start;    // Renamed from startTime
-  final String end;      // Renamed from endTime
+  final String activity;
+  final String start;
+  final String end;
   final String category;
   final String subcategory;
   final double planned;
@@ -41,20 +53,20 @@ class Task {
     required this.subcategory,
     required this.planned,
     required this.actual,
-    required this.isCompleted,
+    this.isCompleted = false, // is completed variable is optional
   });
 
   factory Task.fromMap(String id, Map<String, dynamic> data) {
     return Task(
       id: id,
-      activity: data['activity'] ?? '',         // Read 'activity' from map
-      start: data['start'] ?? '',             // Read 'start' from map
-      end: data['end'] ?? '',                 // Read 'end' from map
-      category: data['category'] ?? 'Uncategorized',
-      subcategory: data['subcategory'] ?? 'Uncategorized',
+      activity: data['activity'] as String? ?? '',
+      start: data['start'] as String? ?? '',
+      end: data['end'] as String? ?? '',
+      category: data['category'] as String? ?? 'Uncategorized',
+      subcategory: data['subcategory'] as String? ?? 'Uncategorized',
       planned: (data['planned'] as num?)?.toDouble() ?? 0.0,
       actual: (data['actual'] as num?)?.toDouble() ?? 0.0,
-      isCompleted: data['isCompleted'] ?? false,
+      isCompleted: data['isCompleted'] as bool? ?? false,
     );
   }
 

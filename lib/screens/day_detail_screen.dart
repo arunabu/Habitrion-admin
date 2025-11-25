@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/day_model.dart';
@@ -74,211 +75,119 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
               _parseDateFromId(a.id).compareTo(_parseDateFromId(b.id)));
           final selectedDay = days[_selectedDayIndex];
 
-          return LayoutBuilder(builder: (context, constraints) {
-            final bool isMobile = constraints.maxWidth < 600;
-
-            if (isMobile) {
-              // Mobile layout with horizontal scrolling
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 110,
-                      child: ListView.builder(
-                        itemCount: days.length,
-                        itemBuilder: (context, index) {
-                          final day = days[index];
-                          final date = _parseDateFromId(day.id);
-                          final isSelected = index == _selectedDayIndex;
-                          return Material(
-                            color: isSelected
-                                ? Colors.deepPurpleAccent.withOpacity(0.2)
-                                : Colors.transparent,
-                            child: InkWell(
-                              onTap: () =>
-                                  setState(() => _selectedDayIndex = index),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 24),
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    left: BorderSide(
-                                      color: isSelected
-                                          ? Colors.deepPurpleAccent
-                                          : Colors.transparent,
-                                      width: 4,
-                                    ),
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      DateFormat('EEE').format(date),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: isSelected
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      DateFormat('MMM d').format(date),
-                                      style: TextStyle(
-                                          color: Colors.grey[400],
-                                          fontSize: 14),
-                                    ),
-                                  ],
-                                ),
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 110,
+                child: ListView.builder(
+                  itemCount: days.length,
+                  itemBuilder: (context, index) {
+                    final day = days[index];
+                    final date = _parseDateFromId(day.id);
+                    final isSelected = index == _selectedDayIndex;
+                    return Material(
+                      color: isSelected
+                          ? Colors.deepPurpleAccent.withOpacity(0.2)
+                          : Colors.transparent,
+                      child: InkWell(
+                        onTap: () => setState(() => _selectedDayIndex = index),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 24),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              left: BorderSide(
+                                color: isSelected
+                                    ? Colors.deepPurpleAccent
+                                    : Colors.transparent,
+                                width: 4,
                               ),
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                    const VerticalDivider(
-                        width: 1, thickness: 1, color: Color(0xFF2A2A2A)),
-                    SizedBox(
-                      width: constraints.maxWidth - 110,
-                      child: ListView(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 16),
-                        children: [
-                          Text(
-                            DateFormat('EEEE, MMMM d')
-                                .format(_parseDateFromId(selectedDay.id)),
-                            style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
                           ),
-                          const SizedBox(height: 24),
-                          if (selectedDay.segments.isEmpty)
-                            const Center(
-                                child: Padding(
-                                    padding: EdgeInsets.only(top: 40),
-                                    child: Text('No tasks for this day.',
-                                        style: TextStyle(color: Colors.grey))))
-                          else
-                            ...selectedDay.segments.map(
-                                (task) => _buildTaskEditor(task, selectedDay.id)),
-                          const SizedBox(height: 24),
-                          ChartsPanel(tasks: selectedDay.segments),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-
-            // Web layout
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 110,
-                  child: ListView.builder(
-                    itemCount: days.length,
-                    itemBuilder: (context, index) {
-                      final day = days[index];
-                      final date = _parseDateFromId(day.id);
-                      final isSelected = index == _selectedDayIndex;
-                      return Material(
-                        color: isSelected
-                            ? Colors.deepPurpleAccent.withOpacity(0.2)
-                            : Colors.transparent,
-                        child: InkWell(
-                          onTap: () =>
-                              setState(() => _selectedDayIndex = index),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 24),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  color: isSelected
-                                      ? Colors.deepPurpleAccent
-                                      : Colors.transparent,
-                                  width: 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                DateFormat('EEE').format(date),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  fontSize: 16,
                                 ),
                               ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              const SizedBox(height: 4),
+                              Text(
+                                DateFormat('MMM d').format(date),
+                                style: TextStyle(
+                                    color: Colors.grey[400], fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const VerticalDivider(
+                  width: 1, thickness: 1, color: Color(0xFF2A2A2A)),
+              Expanded(
+                child: LayoutBuilder(builder: (context, constraints) {
+                  const double taskListWidth = 500.0;
+                  final double chartPanelWidth =
+                      max(400.0, constraints.maxWidth - taskListWidth);
+                  final double totalContentWidth = taskListWidth + chartPanelWidth;
+
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      width: totalContentWidth,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: taskListWidth,
+                            child: ListView(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 24, vertical: 16),
                               children: [
                                 Text(
-                                  DateFormat('EEE').format(date),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: isSelected
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    fontSize: 16,
-                                  ),
+                                  DateFormat('EEEE, MMMM d').format(
+                                      _parseDateFromId(selectedDay.id)),
+                                  style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  DateFormat('MMM d').format(date),
-                                  style: TextStyle(
-                                      color: Colors.grey[400], fontSize: 14),
-                                ),
+                                const SizedBox(height: 24),
+                                if (selectedDay.segments.isEmpty)
+                                  const Center(
+                                      child: Padding(
+                                          padding: EdgeInsets.only(top: 40),
+                                          child: Text('No tasks for this day.',
+                                              style: TextStyle(
+                                                  color: Colors.grey))))
+                                else
+                                  ...selectedDay.segments.map((task) =>
+                                      _buildTaskEditor(task, selectedDay.id)),
                               ],
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const VerticalDivider(
-                    width: 1, thickness: 1, color: Color(0xFF2A2A2A)),
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: ListView(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 16),
-                          children: [
-                            Text(
-                              DateFormat('EEEE, MMMM d')
-                                  .format(_parseDateFromId(selectedDay.id)),
-                              style: const TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 24),
-                            if (selectedDay.segments.isEmpty)
-                              const Center(
-                                  child: Padding(
-                                      padding: EdgeInsets.only(top: 40),
-                                      child: Text('No tasks for this day.',
-                                          style: TextStyle(
-                                              color: Colors.grey))))
-                            else
-                              ...selectedDay.segments.map((task) =>
-                                  _buildTaskEditor(task, selectedDay.id)),
-                          ],
-                        ),
+                          SizedBox(
+                            width: chartPanelWidth,
+                            child: ChartsPanel(tasks: selectedDay.segments),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: ChartsPanel(tasks: selectedDay.segments),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          });
+                    ),
+                  );
+                }),
+              ),
+            ],
+          );
         },
       ),
     );

@@ -25,7 +25,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       final defaultSettings = Settings(theme: 'dark', timezone: 'Asia/Kolkata');
 
       final defaultUser = User(
-        id: 'user_001',
+        id: 'user001',
         profile: defaultProfile,
         settings: defaultSettings,
       );

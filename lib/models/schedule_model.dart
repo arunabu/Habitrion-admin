@@ -1,42 +1,39 @@
-
-import 'dart:developer' as developer;
-
-// Helper to safely parse a double from various numeric types
-double _safeParseDouble(dynamic value) {
-  if (value is double) return value;
-  if (value is int) return value.toDouble();
-  if (value is String) return double.tryParse(value) ?? 0.0;
-  return 0.0;
-}
+import 'package:myapp/models/day_model.dart';
 
 class Schedule {
   final String id;
   final CategoriesSummary categoriesSummary;
   final Map<String, SubcategorySummary> subcategoriesSummary;
+  final Map<String, Day> days;  // ← THIS IS REQUIRED!
 
   Schedule({
     required this.id,
     required this.categoriesSummary,
     required this.subcategoriesSummary,
+    required this.days,
   });
 
   factory Schedule.fromMap(String id, Map<String, dynamic> data) {
-    var categoriesData = data['categoriesSummary'];
-    var subcategoriesData = data['subcategoriesSummary'] as Map<String, dynamic>? ?? {};
-
-    final subcategories = subcategoriesData.map(
-      (key, value) => MapEntry(
-        key,
-        SubcategorySummary.fromMap(value as Map<String, dynamic>),
-      ),
-    );
+    // Safely get nested maps
+    final catMap = data['categoriesSummary'] as Map<String, dynamic>? ?? {};
+    final subcatMap = data['subcategoriesSummary'] as Map<String, dynamic>? ?? {};
+    final daysMap = data['days'] as Map<String, dynamic>? ?? {};
 
     return Schedule(
       id: id,
-      categoriesSummary: categoriesData is Map<String, dynamic>
-          ? CategoriesSummary.fromMap(categoriesData)
-          : CategoriesSummary(planned: {}, actual: {}),
-      subcategoriesSummary: subcategories,
+      categoriesSummary: CategoriesSummary.fromMap(catMap),
+      subcategoriesSummary: subcatMap.map(
+        (key, value) => MapEntry(
+          key,
+          SubcategorySummary.fromMap(value as Map<String, dynamic>),
+        ),
+      ),
+      days: daysMap.map(
+        (dayId, dayData) => MapEntry(
+          dayId,
+          Day.fromMap(dayId, dayData as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 }
@@ -47,13 +44,13 @@ class CategoriesSummary {
 
   CategoriesSummary({required this.planned, required this.actual});
 
-  factory CategoriesSummary.fromMap(Map<String, dynamic> data) {
-    final plannedData = data['planned'] as Map<String, dynamic>? ?? {};
-    final actualData = data['actual'] as Map<String, dynamic>? ?? {};
+  factory CategoriesSummary.fromMap(Map<String, dynamic> map) {
+    final p = (map['planned'] as Map<String, dynamic>?) ?? {};
+    final a = (map['actual'] as Map<String, dynamic>?) ?? {};
 
     return CategoriesSummary(
-      planned: plannedData.map((key, value) => MapEntry(key, _safeParseDouble(value))),
-      actual: actualData.map((key, value) => MapEntry(key, _safeParseDouble(value))),
+      planned: p.map((k, v) => MapEntry(k, (v is num) ? v.toDouble() : 0.0)),
+      actual: a.map((k, v) => MapEntry(k, (v is num) ? v.toDouble() : 0.0)),
     );
   }
 }
@@ -64,10 +61,10 @@ class SubcategorySummary {
 
   SubcategorySummary({required this.planned, required this.actual});
 
-  factory SubcategorySummary.fromMap(Map<String, dynamic> data) {
+  factory SubcategorySummary.fromMap(Map<String, dynamic> map) {
     return SubcategorySummary(
-      planned: _safeParseDouble(data['planned']),
-      actual: _safeParseDouble(data['actual']),
+      planned: (map['planned'] is num) ? (map['planned'] as num).toDouble() : 0.0,
+      actual: (map['actual'] is num) ? (map['actual'] as num).toDouble() : 0.0,
     );
   }
 }

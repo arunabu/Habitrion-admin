@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user_model.dart';
@@ -16,13 +15,19 @@ class _AuthWrapperState extends State<AuthWrapper> {
   @override
   void initState() {
     super.initState();
-    // In a real app, you would have an authentication flow.
-    // For this example, we'll create and set a default user.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final defaultUser = User(
-        id: 'user_001', // Hardcoded default user
+      // Create the nested Profile and Settings objects
+      final defaultProfile = Profile(
         name: 'Arun',
         email: 'arun@example.com',
+        createdAt: DateTime.now().toIso8601String(), // Convert to ISO 8601 string
+      );
+      final defaultSettings = Settings(theme: 'dark', timezone: 'Asia/Kolkata');
+
+      final defaultUser = User(
+        id: 'user_001',
+        profile: defaultProfile,
+        settings: defaultSettings,
       );
       Provider.of<UserProvider>(context, listen: false).setUser(defaultUser);
     });
@@ -33,7 +38,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
     final userProvider = Provider.of<UserProvider>(context);
 
     if (userProvider.user == null) {
-      // You could show a loading spinner here while the user is being fetched
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -41,7 +45,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
       );
     }
 
-    // Once the user is available, show the main screen
     return const ScheduleListScreen();
   }
 }

@@ -2,32 +2,36 @@
 
 ## Overview
 
-This document outlines the plan for a complete UI overhaul of the Flutter application to create a modern and stylish "To-Do List" application. The goal is to build a visually stunning and highly usable interface with a dark theme, custom fonts, and smooth animations.
+This is a Flutter-based productivity app designed to help users track their tasks and time management. The app uses Firebase Firestore as its backend database and the `provider` package for state management.
 
-## Style, Design, and Features
+## Features
 
-### 1. **Visual Design & Theme**
-- **Color Palette**: A sophisticated dark theme will be the foundation.
-  - **Background**: `Color(0xFF0D0D0D)` (A deep, dark charcoal)
-  - **Primary UI Elements**: `Color(0xFF2F80ED)` (A vibrant blue for buttons and borders)
-  - **Accent Color**: `Color(0xFFFFFFFF)` (White for text and key icons)
-- **Typography**: We will use the `google_fonts` package.
-  - **Headings** (`My To-Do List`): `GoogleFonts.lato()` for a clean and modern look.
-  - **Body Text** (Task names): Default Flutter fonts for readability.
-- **Iconography**: Material Design icons will be used for clarity (add, delete).
-- **Effects**: Input fields and buttons will have rounded corners and a subtle border to create a modern look.
+*   **User Authentication:** The app has a basic authentication wrapper that currently uses a hardcoded default user.
+*   **Schedule Viewing:** Users can view a list of their weekly schedules, with progress bars showing the completion of planned tasks.
+*   **Task Management:** Users can view daily tasks, and update the time they've spent on each task.
+*   **Data Persistence:** All schedule and task data is stored in and retrieved from Firebase Firestore.
+*   **Data Import:** The app can import an initial set of tasks from a local JSON file.
 
-### 2. **Application Layout & Structure**
-- **Main Screen (`todo_screen.dart`)**: The screen will be built using a `Column` widget.
-  - **Top Section (Input Field)**: A `Row` containing a `TextField` and an `ElevatedButton` for adding new tasks.
-  - **Bottom Section (Task List)**: A `ListView` to display the list of tasks. Each task will have a delete button.
+## Project Structure
 
-### 3. **State Management**
-- The `_tasks` list will be managed locally within the `_TodoScreenState`.
+*   **`main.dart`:** The main entry point of the application. It initializes Firebase and sets up the root widget.
+*   **`screens/`:** This directory contains the UI of the application.
+    *   **`auth_wrapper.dart`:** Handles the authentication flow.
+    *   **`schedule_list_screen.dart`:** Displays the list of weekly schedules.
+    *   **`day_detail_screen.dart`:** Displays the tasks for a specific day.
+*   **`services/`:**
+    *   **`firestore_service.dart`:** Contains all the logic for interacting with Firebase Firestore.
+*   **`models/`:** This directory contains the data models for the application.
+    *   **`user_model.dart`:** Defines the `User`, `Profile`, and `Settings` classes.
+    *   **`schedule_model.dart`:** Defines the `Schedule`, `CategoriesSummary`, and `SubcategorySummary` classes.
+    *   **`day_model.dart`:** Defines the `Day` and `Task` classes.
+*   **`providers/`:**
+    *   **`user_provider.dart`:** A `ChangeNotifier` that manages the user's state.
 
-## Action Plan for Current Change
+## Current Task: Fix Day of the Week Display Bug
 
-1.  **Create To-Do Screen**: Create `lib/todo_screen.dart` and implement the "To-Do List" UI.
-2.  **Update `main.dart`**: Update `lib/main.dart` to use the new `TodoScreen` and a new, modern theme.
-3.  **Dependencies**: Add `google_fonts` to `pubspec.yaml`.
-4.  **Build and Deploy**: Build the web application and deploy it to Firebase Hosting.
+**Plan:**
+
+1.  **Identify the root cause:** The `day_detail_screen.dart` file was not correctly parsing the date from the day's ID, which is stored in Firestore with hyphens (e.g., "2025-11-24"). The code was expecting underscores (e.g., "2025_11_24").
+2.  **Implement the fix:** The `_parseDateFromId` function in `lib/screens/day_detail_screen.dart` has been updated to handle both hyphens and underscores by replacing underscores with hyphens before parsing the date.
+3.  **Verify the fix:** The user will verify that the days of the week are now displayed correctly in the app.

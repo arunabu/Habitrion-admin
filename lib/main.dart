@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:myapp/dashboard.dart';
-import 'firebase_options.dart';
 
-Future<void> main() async {
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
+import 'providers/user_provider.dart';
+import 'screens/auth_wrapper.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -17,37 +19,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Schedule Manager',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: const Color(0xFF004D40),
-        scaffoldBackgroundColor: const Color(0xFFF0F2F5),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF004D40),
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          iconTheme: IconThemeData(color: Colors.white),
+    return ChangeNotifierProvider(
+      create: (_) => UserProvider(),
+      child: MaterialApp(
+        title: 'Productivity App',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.deepPurpleAccent,
+          fontFamily: 'Roboto',
         ),
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme).apply(
-          bodyColor: Colors.black87,
-          displayColor: Colors.black87,
-        ),
-        cardTheme: CardThemeData(
-          elevation: 1,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          margin: const EdgeInsets.symmetric(vertical: 8.0),
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF004D40),
-          brightness: Brightness.light,
-          primary: const Color(0xFF004D40),
-          secondary: const Color(0xFF00796B),
-          surface: const Color(0xFFF0F2F5),
-          onSurface: Colors.black87,
-        ),
+        home: const AuthWrapper(), // Set the AuthWrapper as the home
       ),
-      home: const Dashboard(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
